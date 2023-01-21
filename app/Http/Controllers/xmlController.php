@@ -6,6 +6,8 @@ use App\Models\Woning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
+
 
 class xmlController extends Controller
 {
@@ -26,6 +28,7 @@ class xmlController extends Controller
 
                 if ($datum == '2023-01-21') {
                     $adres = substr($woningen[$a]['loc'], 17);
+
                     $adresarray = explode('/', $adres);
 
                     $plaats = str_replace('%27', '\'', str_replace('%20', ' ', $adresarray[0]));
@@ -33,18 +36,33 @@ class xmlController extends Controller
                     $nummer = preg_replace('/[^0-9]/', '', $adresarray[2]);
                     $addition = preg_replace('/[^a-zA-Z]/', '', $adresarray[2]);
 
-                    DB::table('woning')->insert(
-                        [
-                            'plaats' => $plaats,
-                            'straat' => $straat,
-                            'nr' => $nummer,
-                            'addition' => $addition,
-                            'datum' => $datum
-                        ]
-                    );
+
+                    // DB::table('woning')->insert(
+                    //     [
+                    //         'plaats' => $plaats,
+                    //         'straat' => $straat,
+                    //         'nr' => $nummer,
+                    //         'addition' => $addition,
+                    //         'datum' => $datum
+                    //     ]
+                    // );
                 }
             }
         }
+        $this->getPostcode($straat);
+
         return view('showXML', compact('woningen'));
     }
+
+    public function getPostcode($straat)
+    {
+
+        $response = Http::withToken('xA1uNvEKgkmKGzN5HySnK5xeY8x3EFs3')->get('https://www.jumba.nl/v1/search', [
+            'q' => 'Kwaadeindstraat 145 Tilburg',
+        ]);
+
+        var_dump($response);
+    }
+
+
 }
