@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\woningController;
+use App\Http\Controllers\xmlController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,5 @@ Route::middleware([
 });
 
 Route::get('woning', [woningController::class, 'viewAll'])->name('woning-viewall');
+
+Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
