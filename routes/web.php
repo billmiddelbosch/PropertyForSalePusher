@@ -34,4 +34,4 @@ Route::middleware([
 
 Route::get('woning', [woningController::class, 'viewAll'])->name('woning-viewall');
 
-Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index')->middleware('auth');
+Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
