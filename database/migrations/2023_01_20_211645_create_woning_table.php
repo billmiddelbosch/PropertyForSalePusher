@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('woning', function (Blueprint $table) {
             $table->id();
-            $table->plaats();
-            $table->straat();
-            $table->nr();
-            $table->addition();
+            $table->string('plaats');
+            $table->string('straat');
+            $table->integer('nr');
+            $table->string('addition');
             $table->timestamps();
         });
     }
