@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('straat');
             $table->integer('nr');
             $table->string('addition');
+            $table->string('postcode');
+            $table->date('datum');
             $table->timestamps();
         });
     }

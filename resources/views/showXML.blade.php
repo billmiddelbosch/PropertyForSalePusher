@@ -14,7 +14,7 @@
                                     <th>Locatie url</th>
                                     <th>Updated</th>
                                 </thead>
-                                @for ($i = 0; $i < 10; $i++)
+                                @for ($i = 0; $i < 100; $i++)
                                 <tbody>
                                     <td> {{$woningen[$i]['loc']}}</td>
                                     <td> {{$woningen[$i]['lastmod']}}</td>
