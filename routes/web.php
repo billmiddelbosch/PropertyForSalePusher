@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\MaklrController;
 use App\Http\Controllers\woningController;
+use App\Http\Controllers\WoonwensenController;
 use App\Http\Controllers\xmlController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('woning', [woningController::class, 'viewAll'])->name('woning-viewall');
+Route::get('/woning', [woningController::class, 'viewAll'])->name('woning-viewall');
 
-Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
+Route::get('/getXML', [xmlController::class, 'index'])->name('getxml-index');
+
+Route::get('/Makrl', [MaklrController::class, 'index'])->name('maklr-index');
+
+Route::get('/Woonwensen', [WoonwensenController::class, 'loadJSON'])->name('woonwensen-index');
