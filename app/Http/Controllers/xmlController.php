@@ -57,7 +57,10 @@ class xmlController extends Controller
     public function getPostcode($straat)
     {
 
-        $response = Http::withToken('xA1uNvEKgkmKGzN5HySnK5xeY8x3EFs3')->get('https://www.jumba.nl/v1/search', [
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'API_KEY' => 'xA1uNvEKgkmKGzN5HySnK5xeY8x3EFs3'
+        ])->get('https://www.jumba.nl/v1/search', [
             'q' => 'Kwaadeindstraat 145 Tilburg',
         ]);
 
