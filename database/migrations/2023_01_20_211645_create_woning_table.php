@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('addition');
             $table->string('postcode');
             $table->date('datum');
+            $table->boolean('status');
+            $table->string('jumbaId');
             $table->timestamps();
         });
     }
