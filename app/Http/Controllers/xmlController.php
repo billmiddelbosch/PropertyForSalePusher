@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 
+
 class xmlController extends Controller
 {
     public function index()
@@ -23,10 +24,10 @@ class xmlController extends Controller
 
             $woningen = $phpArray['url'];
             // for ($a = 0; $a < count($woningen); $a++) {
-            for ($a = 0; $a < 50; $a++) {
+            for ($a = 0; $a < 10; $a++) {
                 $datum = substr($woningen[$a]['lastmod'], 0, 10);
 
-                if ($datum == '2023-01-30') {
+                if ($datum == substr(now()->toDateTimeString(), 0, 10)) {
                     $item = "";
                     $adres = substr($woningen[$a]['loc'], 17);
 
@@ -67,7 +68,6 @@ class xmlController extends Controller
                                 ]
                             );
                         }
-                        echo '</br>';
                     } else {
                         $status = false;
                         $postcode = "unknown";
@@ -77,8 +77,16 @@ class xmlController extends Controller
                 }
             }
         }
+
+        $woningen = woning::where('plaats', 'Tilburg')->get();
+
+        foreach ($woningen as $woning) {
+            echo $woning->straat . '</br>';
+        }
         
-        return view('showXML', compact('woningen'));
+        
+
+        //return view('showXML', compact('woningen'));
     }
 
     public function getPostcode($adresquery)
@@ -94,6 +102,5 @@ class xmlController extends Controller
         }
         
     }
-
 
 }
