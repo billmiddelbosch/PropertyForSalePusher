@@ -79,7 +79,7 @@ class xmlController extends Controller
         }
 
         foreach (woning::all() as $house) {
-            echo $house->straat . '</br>';
+            echo $house->straat . $house->nummer .  $house->$jumbaId .  '</br>';
         }
         
         //return view('showXML', compact('woningen'));
