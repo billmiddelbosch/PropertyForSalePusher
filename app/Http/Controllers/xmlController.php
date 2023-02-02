@@ -78,14 +78,12 @@ class xmlController extends Controller
             }
         }
 
-        $woningen = woning::where('plaats', 'Tilburg')->get();
+        $houses = woning::where('plaats', 'Haarlem')->get();
 
-        foreach ($woningen as $woning) {
-            echo $woning->straat . '</br>';
+        foreach ($houses as $house) {
+            echo $house->straat . '</br>';
         }
         
-        
-
         //return view('showXML', compact('woningen'));
     }
 
