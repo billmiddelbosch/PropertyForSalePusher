@@ -78,9 +78,7 @@ class xmlController extends Controller
             }
         }
 
-        $houses = woning::where('plaats', 'Haarlem')->get();
-
-        foreach ($houses as $house) {
+        foreach (woning::all() as $house) {
             echo $house->straat . '</br>';
         }
         
