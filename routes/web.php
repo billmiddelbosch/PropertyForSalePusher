@@ -35,3 +35,15 @@ Route::middleware([
 Route::get('woning', [woningController::class, 'viewAll'])->name('woning-viewall');
 
 Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
+
+// View to se the PUSHER post 
+Route::get('viewPost', function () {
+    return view('notification');
+});
+
+// Route to manual post a PUSHER post 
+Route::get('testPush', function () {
+    event(new App\Events\propertyStatusUpdate('Bill'));
+    echo "sent";
+    // return view('notification');
+});
