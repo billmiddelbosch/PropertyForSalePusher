@@ -1,16 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts/basic')
+@section('title', 'Homepage')
+@section('body')
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-</head>
 
-<body>
-    <h1>Hello World</h1>
-    <h2>check deploy again</h2>
-</body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Zoek woning
+                </div>
+                <div class="card-body">
+                    {{-- @if (Session::has('woning-updated')) 
+                        <div class="alert alert-succes" role="alert">{{Session::get('woning-updated')}}</div>
+                    @endif --}}
+                    
+                        {{-- <livewire:suggest /> --}}
+                    <form method=POST action="{{route('homepage.searchdetails')}}">
+                        @csrf <!-- toevoeging nodig om sessie te behouden -->
+                    
+                        <div class="form-floating">
+                        <span class="input-group-text" id="addon-wrapping">plaats</span>
+                        <input type="text" class="form-control" id="plaats" name="plaats">
+                        <span class="input-group-text" id="addon-wrapping">Straat</span>
+                        <input type="text" class="form-control" id="straat" name="straat">
+                        <span class="input-group-text" id="addon-wrapping">Nummer</span>
+                        <input type="text" class="form-control" id="nr" name="nr">
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Search</button>
 
-</html>
+                        {{-- @error('straat')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror --}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endsection

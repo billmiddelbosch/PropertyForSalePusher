@@ -11,4 +11,10 @@ class HomepageController extends Controller
     {
         return view('homepage');
     }
+
+    public function searchDetails(Request $request)
+    {
+        return redirect()->route('woningdetails-finddetails', array('plaats' => $request->plaats, 'straat' => $request->straat, 'nr' => $request->nr));
+    }
+
 }

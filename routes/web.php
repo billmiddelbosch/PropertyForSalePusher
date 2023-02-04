@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\woningController;
+use App\Http\Controllers\woningdetailController;
 use App\Http\Controllers\xmlController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +25,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomepageController::class, 'index'])->name('homepage.index');
+Route::post('/home', [HomepageController::class, 'searchDetails'])->name('homepage.searchdetails');
 
 Route::middleware([
     'auth:sanctum',
@@ -32,6 +37,14 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('woning', [woningController::class, 'viewAll'])->name('woning-viewall');
+Route::get('woningen', [woningController::class, 'viewAll'])->name('woningen-viewall');
 
 Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
+
+Route::get('getXML', [xmlController::class, 'index'])->name('getxml-index');
+
+Route::get('/woning/{plaats}/{straat?}/{nr?}/{toev?}', [woningdetailController::class, 'findDetails'])
+    ->name('woningdetails-finddetails')
+    ->missing(function (Request $request) {
+        return Redirect::route('homepage.index');
+    });
