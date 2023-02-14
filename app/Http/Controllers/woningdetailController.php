@@ -14,16 +14,17 @@ class woningdetailController extends Controller
         $adresquery = $straat . " " . $nr . " " . $toev . " " .  $plaats;
 
         // query woningdetails at Jumba API
-        $woningdetails = $this->getPostcode($adresquery);
+        $jumbaDetails = $this->getJumbadata($adresquery);
+
+        $altumDetails = $this->getAltumdata(strtoupper($jumbaDetails['Filter']['Postcode']), $jumbaDetails['Filter']['Number']);
 
         // open Detail page
-        // var_dump($woningdetails);
 
-        return view('detailPage', compact('woningdetails'));
+        return view('detailPage', compact('jumbaDetails', 'altumDetails'));
     }
 
 
-    public function getPostcode($adresquery = NULL)
+    public function getJumbadata($adresquery = NULL)
     {
         $response = Http::withHeaders([
             'api-key' => 'xA1uNvEKgkmKGzN5HySnK5xeY8x3EFs3'
@@ -31,6 +32,24 @@ class woningdetailController extends Controller
 
         if ($response->successful() && $response['Items'] !== NULL) {
             return $response['Items'][0];
+        } else {
+            echo "helaas";
+        }
+    }
+
+    public function getAltumdata($postcode = NULL, $nummer = NULL)
+    {
+
+        $response = Http::withHeaders([
+            'x-api-key' => 'm2ipzWVV3e9yPU9TduqpY4oZTbcEHCGj31GLVLYB',
+            'Content-Type' => 'application/json'
+        ])->post('https://api.altum.ai/sandbox/avm', [
+            'postcode' => $postcode,
+            'housenumber' =>  $nummer
+        ]);
+
+        if ($response->successful()) {
+            return $response;
         } else {
             echo "helaas";
         }
