@@ -48,3 +48,7 @@ Route::get('/woning/{plaats}/{straat?}/{nr?}/{toev?}', [woningdetailController::
     ->missing(function (Request $request) {
         return Redirect::route('homepage.index');
     });
+
+Route::get('testVue',  function () {
+    return view('testVue');
+})->name('testvue');
